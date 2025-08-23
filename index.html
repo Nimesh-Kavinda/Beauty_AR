@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Lipstick Try-On</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MediaPipe FaceMesh CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>AR Lipstick Try-On</h1>
+            <p>Try different lipstick colors in real-time!</p>
+        </header>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <!-- Video container -->
+            <div class="video-container">
+                <video id="video" class="video-element" autoplay muted playsinline></video>
+                <canvas id="canvas" class="canvas-overlay"></canvas>
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Initializing camera and face detection...</p>
+                </div>
+            </div>
+
+            <!-- Controls panel -->
+            <div class="controls-panel">
+                <!-- Preset colors -->
+                <div class="preset-colors">
+                    <h3>Preset Colors</h3>
+                    <div class="color-buttons">
+                        <button class="color-btn" data-color="#FF6B6B" style="background-color: #FF6B6B;" title="Coral Red"></button>
+                        <button class="color-btn" data-color="#FF1744" style="background-color: #FF1744;" title="Classic Red"></button>
+                        <button class="color-btn" data-color="#C2185B" style="background-color: #C2185B;" title="Berry Pink"></button>
+                        <button class="color-btn" data-color="#8E24AA" style="background-color: #8E24AA;" title="Purple"></button>
+                        <button class="color-btn" data-color="#FF5722" style="background-color: #FF5722;" title="Orange Red"></button>
+                    </div>
+                </div>
+
+                <!-- Custom color picker -->
+                <div class="custom-color">
+                    <h3>Custom Color</h3>
+                    <input type="color" id="colorPicker" value="#FF6B6B">
+                    <button id="applyCustom" class="btn btn-primary">Apply Custom</button>
+                </div>
+
+                <!-- Action buttons -->
+                <div class="action-buttons">
+                    <button id="resetBtn" class="btn btn-secondary">Reset to Natural</button>
+                    <button id="toggleCamera" class="btn btn-secondary">Toggle Camera</button>
+                </div>
+
+                <!-- Settings -->
+                <div class="settings">
+                    <h3>Settings</h3>
+                    <div class="setting-item">
+                        <label for="opacity">Lipstick Opacity:</label>
+                        <input type="range" id="opacity" min="0.3" max="1" step="0.1" value="0.7">
+                        <span id="opacityValue">0.7</span>
+                    </div>
+                    <div class="setting-item">
+                        <label for="blur">Blur Effect:</label>
+                        <input type="range" id="blur" min="0" max="5" step="1" value="1">
+                        <span id="blurValue">1</span>
+                    </div>
+                </div>
+
+                <!-- Status indicator -->
+                <div class="status" id="status">
+                    <div class="status-indicator offline" id="statusIndicator"></div>
+                    <span id="statusText">Initializing...</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Compatible with Chrome, Edge, Firefox | Requires camera permission</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
